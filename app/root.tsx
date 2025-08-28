@@ -6,8 +6,10 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
-
+import { GoogleOAuthProvider} from "@react-oauth/google";
 import type { Route } from "./+types/root";
+import { useEffect } from "react";
+import { usePuterStore } from "~/lib/puter";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -24,6 +26,11 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const { init } = usePuterStore();
+    useEffect(() => {
+        init();
+    }, [init]);
+
   return (
     <html lang="en">
       <head>
@@ -33,7 +40,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+      <script src="https://js.puter.com/v2/"></script>
+      {children}
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -41,8 +49,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+const clientId = "79532774279-q8pkjtd39degg7chqetgk3ulg003lb5e.apps.googleusercontent.com";
 export default function App() {
-  return <Outlet />;
+  return (
+      <GoogleOAuthProvider clientId={clientId}>
+          <Outlet />
+      </GoogleOAuthProvider>);
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
