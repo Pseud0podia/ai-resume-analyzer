@@ -7,8 +7,9 @@ interface Props {
 }
 
 const CompanySuggestions: React.FC<Props> = ({ companies, isPaid, onPayClick }) => (
-  <div className="relative my-8 rounded-2xl shadow bg-white p-6">
-    <h3 className="text-2xl font-bold mb-4">Companies Interested In Your Skillset</h3>
+  <div className="relative my-8 rounded-2xl shadow bg-white p-10 w-full my-auto h-auto flex flex-col">
+    {/* Heading at the top */}
+    <h3 className="text-3xl font-bold mb-4">Companies Interested In Your Skillset</h3>
     <div className={isPaid ? "" : "paywall-blur"}>
       <ul className="flex flex-wrap gap-4">
         {companies.map((c) => (
@@ -22,7 +23,7 @@ const CompanySuggestions: React.FC<Props> = ({ companies, isPaid, onPayClick }) 
       </ul>
     </div>
     {!isPaid && (
-      <div className="paywall-overlay flex flex-col items-center justify-center">
+      <div className="paywall-overlay flex flex-col items-center justify-start">
         <img
           src="/icons/lock.svg"
           alt="Locked"
@@ -34,7 +35,7 @@ const CompanySuggestions: React.FC<Props> = ({ companies, isPaid, onPayClick }) 
         <span className="mb-4 text-sm text-gray-500 text-center max-w-xs">
           Pay to see which companies match your skillset!
         </span>
-        <button className="primary-button" onClick={onPayClick}>
+        <button className="primary-button w-auto" onClick={onPayClick}>
           Unlock Now
         </button>
       </div>
