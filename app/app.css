@@ -3,8 +3,9 @@
 @import "tw-animate-css";
 
 @theme {
-  --font-sans: "Mona Sans", ui-sans-serif, system-ui, sans-serif,
-  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans:
+    "Mona Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --color-dark-200: #475467;
   --color-light-blue-100: #c1d3f81a;
   --color-light-blue-200: #a7bff14d;
@@ -57,8 +58,12 @@ form {
     @apply bg-gradient-to-b from-light-blue-100 to-light-blue-200 p-4 rounded-2xl;
   }
   .primary-button {
-    @apply primary-gradient text-white rounded-full px-4 py-2 cursor-pointer w-full;
+    @apply primary-gradient text-white rounded-full px-4 py-2 cursor-pointer w-full font-semibold shadow-md transition;
   }
+  .primary-button:hover {
+    @apply primary-gradient-hover;
+  }
+
   .resume-nav {
     @apply flex flex-row justify-between items-center p-4 border-b border-gray-200;
   }
@@ -113,6 +118,24 @@ form {
   }
   .uploader-selected-file {
     @apply flex items-center justify-between p-3 bg-gray-50 rounded-2xl;
+  }
+
+  /* Paywall styles */
+  .paywall-blur {
+    filter: blur(6px);
+    pointer-events: none;
+    transition: filter 0.3s;
+  }
+
+  .paywall-overlay {
+    @apply absolute inset-0 flex flex-col items-center justify-center bg-white/70 rounded-2xl z-10;
+  }
+
+  .pay-input {
+    @apply border border-gray-300 rounded-xl px-4 py-2 text-lg outline-none transition;
+  }
+  .pay-input:focus {
+    @apply border-indigo-500;
   }
 }
 
